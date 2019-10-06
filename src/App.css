@@ -23,8 +23,18 @@
   color: #61dafb;
 }
 
+.App-header {
+  flex-direction: row;
+}
+
 .search {
+  flex-direction: column;
   text-align: left;
+  margin-left: 25px;
+}
+
+.cart {
+  flex-direction: column;
   margin-left: 25px;
 }
 
