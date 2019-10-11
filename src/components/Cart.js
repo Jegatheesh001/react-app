@@ -6,7 +6,7 @@ const Cart = ({data}) => {
             ------------------------------------<br />
             My Cart: {data.length} <br />
             {
-                data.map(user => (<div>{user}</div>))
+                data.map((country, index) => (<div key={index}>{country}</div>))
             }
         </div>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Search = ({handler, users, cartHandler}) => {
+const Search = ({handler, countries, placeholder, cartHandler}) => {
     return (
         <div className="search">
-            <input type="search" onChange={handler} />
+            <input type="search" onChange={handler} placeholder={placeholder} />
             {
-                users.map(user => (<div key={user.id} id={user.id} onClick={cartHandler}>{user.name}</div>))
+                countries.map((country, index) => (<div key={country.alpha2Code} id={country.alpha2Code} onClick={cartHandler}>{country.name}</div>))
             }
         </div>
     );

@@ -9,33 +9,39 @@ class App extends React.Component {
   constructor() {
     super(); 
     this.state = {
-      users: [],
+      countries: [],
       search: [],
-      userMap: {},
+      countryMap: {},
       cartItems: [],
       cartList: []
     };
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch("https://restcountries-v1.p.rapidapi.com/region/asia", {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "restcountries-v1.p.rapidapi.com",
+        "x-rapidapi-key": "f5c7f9dd75msh64bb7a2b72c4f6ep1d61b2jsnc34ce7578343"
+      }
+    })
     .then(response => response.json())
-    .then(users => {
+    .then(countries => {
       this.setState({
-        users: users,
-        search: users
+        countries: countries,
+        search: countries
       });
-      return users;
+      return countries;
     }).then(users => {
-      let userMap = new Map();
-      this.state.users.forEach(user => userMap.set(user.id, user.name));
-      this.setState({userMap});
-    });
+      let countryMap = new Map();
+      this.state.countries.forEach(country => countryMap.set(country.alpha2Code, country.name));
+      this.setState({countryMap});
+    });;
   }
 
   searchHandler = (e) => {
     this.setState({
-      search: this.state.users.filter(user => user.name.toLowerCase().includes(e.target.value.toLowerCase()))
+      search: this.state.countries.filter(country => country.name.toLowerCase().includes(e.target.value.toLowerCase()))
     });
   }
 
@@ -45,7 +51,7 @@ class App extends React.Component {
       let cartItems = this.state.cartItems;
       let cartList = this.state.cartList;
       cartItems.push(id);
-      cartList.push(this.state.userMap.get(id));
+      cartList.push(this.state.countryMap.get(id));
       this.setState({cartItems, cartList});
     }
   }
@@ -54,7 +60,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header title="My React App" />
-        <Search handler={this.searchHandler} cartHandler={this.cartHandler} users={this.state.search} />
+        <Search placeholder="Enter country name" handler={this.searchHandler} cartHandler={this.cartHandler} countries={this.state.search} />
         <Cart data={this.state.cartList} />
       </div>)
   }
