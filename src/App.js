@@ -60,8 +60,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header title="My React App" />
-        <Search placeholder="Enter country name" handler={this.searchHandler} cartHandler={this.cartHandler} countries={this.state.search} />
-        <Cart data={this.state.cartList} />
+		<div className="content">
+			<Search placeholder="Enter country name" handler={this.searchHandler} cartHandler={this.cartHandler} countries={this.state.search} />
+			<Cart data={this.state.cartList} />
+		</div>
       </div>)
   }
 }
